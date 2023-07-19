@@ -22,7 +22,7 @@
                         <input class="form-control" type="text" name="phone">
                     </div>
                     <div class="mt-3">
-                        
+
                         <button class="btn btn-warning" type="reset">Reset</button>
                         <button class="btn btn-primary" type="submit">save</button>
                     </div>
@@ -38,6 +38,7 @@
 
 
     <?php
+    $alert = '';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $oldPhone = '123';
         $phone = $_REQUEST['phone'];
@@ -45,10 +46,23 @@
             header('Location: welcome.php');
             exit();
         } else {
-            echo 'phone mele nai';
+            $alert = 'phone mele nai';
         }
     }
     ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var alertMessage = '<?php echo addslashes($alert); ?>';
+        if (alertMessage !== '') {
+            Swal.fire({
+                title: 'Error!',
+                text: alertMessage,
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            });
+        }
+    </script>
 
 </body>
 
